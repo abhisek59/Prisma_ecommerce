@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";   
 import { mainRouter } from "./routes/index.js";
+import setupSwagger from "./utils/swagger.js";
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.use((req, res, next) => {
     console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
     next();
 });
+
+// Setup Swagger documentation
+setupSwagger(app);
 
 // Use main router for all routes
 app.use('/', mainRouter);
